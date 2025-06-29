@@ -99,13 +99,19 @@
       </div>
 
       <!-- Instalment No -->
-      <input
-        type="number"
-        id="instalment_no"
-        name="instalment_no"
-        placeholder="Instalment No."
-        class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+      <div class="flex flex-col col-span-1">
+        <input
+          type="number"
+          id="instalment_no"
+          name="instalment_no"
+          placeholder="Instalment No."
+          class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <p
+          id="instalment_no-in-words"
+          class="text-xs text-blue-600 italic mt-1"
+        ></p>
+      </div>
 
       <!-- Instalment Due -->
       <input
@@ -316,12 +322,11 @@
 
           // Final single logic block
           //if (i === 0 && n === 0) {
-            //instDue.value = "0.00";
+          //instDue.value = "0.00";
           //} else {
-            //const newDue = lastInstDue - i * n;
-            const newDue = lastLoan - i * n;
-            instDue.value = (newDue > 0 ? newDue : 0).toFixed(2);
-          
+          //const newDue = lastInstDue - i * n;
+          const newDue = lastLoan - i * n;
+          instDue.value = (newDue > 0 ? newDue : 0).toFixed(2);
         });
       });
 
@@ -377,6 +382,14 @@
         const instValue = parseInt(inst.value) || 0;
         const inWords = numberToWords(instValue);
         document.getElementById("instalment-in-words").textContent = instValue
+          ? `${inWords}`
+          : "";
+      });
+
+      instNo.addEventListener("input", () => {
+        const instNoValue = parseInt(instNo.value) || 0;
+        const inWords = numberToWords(instNoValue);
+        document.getElementById("instalment_no-in-words").textContent = instNoValue
           ? `${inWords}`
           : "";
       });
