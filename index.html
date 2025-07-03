@@ -164,7 +164,7 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody id="data-table"></tbody>
+        <tbody id="data-table" class="[&>tr:hover]:bg-yellow-100 [&>tr:focus]:bg-yellow-200 cursor-pointer"></tbody>
       </table>
     </div>
     <script>
@@ -588,6 +588,21 @@
       clearSearch.addEventListener("click", () => {
         search.value = "";
         search.dispatchEvent(new Event("input"));
+      });
+      // Highlight Rows
+      document.addEventListener("DOMContentLoaded", () => {
+        table.addEventListener("click", (e) => {
+          const clickedRow = e.target.closest("tr");
+          if (!clickedRow) return;
+      
+          // Remove highlight from all rows
+          [...table.querySelectorAll("tr")].forEach((row) =>
+            row.classList.remove("bg-yellow-200", "ring-2", "ring-yellow-400")
+          );
+      
+          // Add highlight to the selected row
+          clickedRow.classList.add("bg-yellow-200", "ring-2", "ring-yellow-400");
+        });
       });
 
         form.addEventListener('submit', async (e) => {
