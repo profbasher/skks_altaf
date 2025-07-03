@@ -8,7 +8,6 @@
   </head>
   <body class="bg-white text-black p-6">
     <h1 class="text-2xl font-bold mb-4">Savings Manager(skks-a)</h1>
-
     <!-- Form -->
     <form id="savings-form" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       <!-- Month Input (Text) -->
@@ -22,8 +21,6 @@
         class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         required
       />
-
-      <!-- Savings Input -->
       <div class="flex flex-col col-span-1">
         <input
           type="number"
@@ -31,12 +28,11 @@
           name="savings"
           placeholder="Savings"
           value="500"
-          class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          readonly
+          class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-600 cursor-not-allowed"
         />
         <p id="savings-in-words" class="text-xs text-blue-600 italic mt-1"></p>
       </div>
-
-      <!-- Profit Input -->
       <div class="flex flex-col col-span-1">
         <input
           type="number"
@@ -47,8 +43,6 @@
         />
         <p id="profit-in-words" class="text-xs text-blue-600 italic mt-1"></p>
       </div>
-
-      <!-- Withdraw -->
       <div class="flex flex-col col-span-1">
         <input
           type="number"
@@ -59,18 +53,14 @@
         />
         <p id="withdraw-in-words" class="text-xs text-blue-600 italic mt-1"></p>
       </div>
-
-      <!-- Total (Disabled) -->
       <input
         type="number"
         id="total"
         name="total"
         placeholder="Total"
-        class="p-2 border rounded bg-gray-100 text-gray-600"
-        disabled
+        class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-600 cursor-not-allowed"
+        readonly
       />
-
-      <!-- Loan Input + Words -->
       <div class="flex flex-col col-span-1">
         <input
           type="number"
@@ -81,8 +71,6 @@
         />
         <p id="loan-in-words" class="text-xs text-blue-600 italic mt-1"></p>
       </div>
-
-      <!-- Instalment Input + Words -->
       <div class="flex flex-col col-span-1">
         <input
           type="number"
@@ -97,41 +85,34 @@
           class="text-xs text-blue-600 italic mt-1"
         ></p>
       </div>
-
-      <!-- Instalment No -->
       <div class="flex flex-col col-span-1">
         <input
           type="number"
           id="instalment_no"
           name="instalment_no"
           placeholder="Instalment No."
-          class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          readonly
+          class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-600 cursor-not-allowed" 
         />
         <p
           id="instalment_no-in-words"
           class="text-xs text-blue-600 italic mt-1"
         ></p>
       </div>
-
-      <!-- Instalment Due -->
       <input
         type="number"
         id="instalment_due"
         name="instalment_due"
         placeholder="Instalment Due"
-        class="p-2 border rounded bg-gray-100 text-gray-600"
+        class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-600 cursor-not-allowed"
         readonly
       />
-
-      <!-- Receive Date -->
       <input
         type="date"
         id="receive_date"
         name="receive_date"
         class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-
-      <!-- Receiver -->
       <input
         type="text"
         id="receiver"
@@ -140,8 +121,6 @@
         value="altaf"
         class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-
-      <!-- Message -->
       <input
         type="text"
         id="message"
@@ -150,67 +129,22 @@
         value="paid"
         class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-
       <input type="hidden" id="rowId" name="id" />
-
-      <!-- Submit Button -->
-      <button
-        class="col-span-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-      >
-        Submit
-      </button>
+      <input type="hidden" id="method" name="action" value="create">
+      <button type="submit" class="col-span-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Submit</button>
     </form>
-
-    <!-- Search + Last Total + Last Loan -->
-    <div
-      class="flex flex-col md:flex-row items-start md:items-center gap-4 mb-4 w-full"
-    >
-      <!-- Search Field -->
+    <div class="flex flex-col md:flex-row items-start md:items-center gap-4 mb-4 w-full">
       <div class="relative w-full md:w-1/2">
-        <input
-          type="text"
-          id="search"
-          placeholder="Search..."
-          class="w-full p-2 border rounded"
-        />
-        <button
-          id="clearSearch"
-          class="absolute right-2 top-2 text-xl text-gray-500 hover:text-black hidden"
-        >
-          ×
-        </button>
+        <input type="text" id="search" placeholder="Search..." class="w-full p-2 border rounded"/>
+       <button id="clearSearch" class="absolute right-2 top-2 text-xl text-gray-500 hover:text-black hidden">×</button>
       </div>
-
-      <!-- Last Total Display -->
       <div class="flex gap-2 w-full md:w-auto">
         <input
-          type="text"
-          id="lastTotalDisplay"
-          class="w-full md:w-40 p-2 border rounded bg-gray-100 text-gray-700"
-          readonly
-          placeholder="Last Total"
-          title="Last month's total"
-        />
-        <input
-          type="text"
-          id="lastLoanDisplay"
-          class="w-full md:w-40 p-2 border rounded bg-gray-100 text-gray-700"
-          readonly
-          placeholder="Last Loan"
-          title="Last non-zero loan"
-        />
-        <input
-          type="text"
-          id="lastInstDueDisplay"
-          class="w-full md:w-40 p-2 border rounded bg-gray-100 text-gray-700"
-          readonly
-          placeholder="Last Instalment Due"
-          title="Instalment Due for Last Loan"
-        />
+          type="text" id="lastTotalDisplay" class="w-full md:w-40 p-2 border rounded bg-gray-100 text-gray-700" readonly placeholder="Last Total" title="Last month's total"/>
+        <input type="text" id="lastLoanDisplay" class="w-full md:w-40 p-2 border rounded bg-gray-100 text-gray-700" readonly placeholder="Last Loan" title="Last non-zero loan"/>
+        <input type="text" id="lastInstDueDisplay" class="w-full md:w-40 p-2 border rounded bg-gray-100 text-gray-700" readonly placeholder="Last Instalment Due" title="Instalment Due for Last Loan"/>
       </div>
     </div>
-
-    <!-- Table -->
     <div class="overflow-auto">
       <table class="table-auto w-full text-sm text-left border">
         <thead class="bg-gray-200">
@@ -233,11 +167,10 @@
         <tbody id="data-table"></tbody>
       </table>
     </div>
-
     <script>
       const scriptURL =
-        "https://script.google.com/macros/s/AKfycbw_sQWLCFERbF1ABI53ZVVx5n7b8a9QJ7CPgfnsxPgNfhqu8Ex7YlzGl0qieOeTokTN/exec";
-
+        "https://script.google.com/macros/s/AKfycbzhC2a_JiXBwwHRQ_rp72WJV8TwHs3Z5p8gSeelWmD79iGInJUqWb6MZvddF7VOJ-6C8Q/exec";
+        
       const form = document.getElementById("savings-form");
       const table = document.getElementById("data-table");
       const total = document.getElementById("total");
@@ -253,7 +186,10 @@
       const search = document.getElementById("search");
       const clearSearch = document.getElementById("clearSearch");
 
-      // Month input default as "June 2025"
+      let isEditing = false; // <-- Add this
+
+      window.lastLoan = 0;
+
       const now = new Date();
       const monthsText = [
         "January",
@@ -273,62 +209,64 @@
         monthsText[now.getMonth()]
       } ${now.getFullYear()}`;
       month.value = defaultMonthYear;
-
-      // Default receive date GMT+6
       const offsetDate = new Date(new Date().getTime() + 6 * 60 * 60 * 1000)
         .toISOString()
         .split("T")[0];
       receiveDate.value = offsetDate;
 
-      [inst, instNo].forEach((input) => {
-        input.addEventListener("input", () => {
-          const i = parseFloat(inst.value) || 0;
-          const n = parseInt(instNo.value) || 0;
-          //const lastLoan = window.lastLoan || 0;
-          //let lastInstDue = 0;
+      function updateInstAndNo() {
+      if (isEditing) return;
 
-          // Get previous instalment due from the previous row of the table
-          const rows = Array.from(table.querySelectorAll("tr"));
-          const currentMonthValue = month.value.trim().toLowerCase();
+      const currentInst = parseFloat(inst.value);
+      const currentLoan = parseFloat(loan.value);
 
-          let previousRow = null;
-          for (let i = 0; i < rows.length - 1; i++) {
-            const nextMonth = rows[i + 1].children[0]?.textContent
-              ?.trim()
-              ?.toLowerCase();
-            if (nextMonth === currentMonthValue) {
-              previousRow = rows[i];
-              break;
-            }
+      if (!currentLoan || currentLoan <= 0 || !currentInst || currentInst <= 0) {
+        instNo.value = "";
+        instDue.value = "";
+        return;
+      }
+
+      const rows = Array.from(table.querySelectorAll("tr")).reverse(); // Latest first
+      let lastLoan = 0;
+      let loanIndex = -1;
+      let instalmentSum = 0;
+      let instalmentCount = 0;
+
+      // Step 1: Find the latest non-zero loan
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const loanVal = parseFloat(row.children[5]?.textContent) || 0;
+        if (loanVal > 0) {
+          lastLoan = loanVal;
+          loanIndex = i;
+          break;
+        }
+      }
+
+      if (loanIndex >= 0) {
+        // Step 2: Sum instalments AFTER this loan (rows BEFORE in reversed array)
+        for (let i = 0; i < loanIndex; i++) {
+          const instVal = parseFloat(rows[i].children[6]?.textContent) || 0;
+          if (instVal > 0) {
+            instalmentSum += instVal;
+            instalmentCount++;
           }
+        }
 
-          /*if (previousRow) {
-            const prevInstDueCell = previousRow.children[8]; // 9th column
-            lastInstDue = parseFloat(prevInstDueCell.textContent) || 0;
-          } else {
-            lastInstDue =
-              parseFloat(document.getElementById("lastInstDueDisplay").value) ||
-              0;
-          }*/
-          // Get the last non-zero loan from the most recent previous row
-          let lastLoan = 0;
-          if (previousRow) {
-            const loanCell = previousRow.children[5]; // 6th column = Loan
-            lastLoan = parseFloat(loanCell.textContent) || 0;
-          } else {
-            lastLoan =
-              parseFloat(document.getElementById("lastLoanDisplay").value) || 0;
-          }
+        const totalPaid = instalmentSum + currentInst;
+        const due = lastLoan - totalPaid;
 
-          // Final single logic block
-          //if (i === 0 && n === 0) {
-          //instDue.value = "0.00";
-          //} else {
-          //const newDue = lastInstDue - i * n;
-          const newDue = lastLoan - i * n;
-          instDue.value = (newDue > 0 ? newDue : 0).toFixed(2);
-        });
-      });
+        instNo.value = instalmentCount + 1;
+        instDue.value = due > 0 ? due.toFixed(2) : "0.00";
+      } else {
+        instNo.value = 1;
+        instDue.value = (currentLoan - currentInst).toFixed(2);
+      }
+    }
+
+      [inst, loan].forEach((input) =>
+        input.addEventListener("input", updateInstAndNo)
+      );
 
       [savings, profit, withdraw].forEach((input) => {
         input.addEventListener("input", () => {
@@ -336,40 +274,45 @@
           const p = parseFloat(profit.value) || 0;
           const w = parseFloat(withdraw.value) || 0;
 
-          // Get previous total from the immediate previous month row
           let previousTotal = 0;
-          const rows = Array.from(table.querySelectorAll("tr"));
-          const currentMonthValue = month.value.trim().toLowerCase();
+          if (isEditing) {
+            // In edit mode, get previousTotal from the row BEFORE the current one
+            const rowId = document.getElementById("rowId").value;
+            const rows = Array.from(table.querySelectorAll("tr"));
+            const currentIndex = rows.findIndex(r => {
+              const monthCell = r.children[0]?.textContent.trim().toLowerCase();
+              const formattedMonth = month.value.trim().toLowerCase();
+              return monthCell === formattedMonth;
+            });
 
-          let previousRow = null;
+            // Look for the *previous* row's total
+            for (let i = currentIndex + 1; i < rows.length; i++) {
+              const totalCell = rows[i]?.children[4];
+              if (totalCell) {
+                previousTotal = parseFloat(totalCell.textContent) || 0;
+                break;
+              }
+            }
+          } else {
+            // In create mode
+            const rows = Array.from(table.querySelectorAll("tr")).reverse();
+            const currentMonthValue = month.value.trim().toLowerCase();
 
-          for (let i = 0; i < rows.length - 1; i++) {
-            const thisMonth = rows[i].children[0]?.textContent
-              ?.trim()
-              ?.toLowerCase();
-            const nextMonth = rows[i + 1].children[0]?.textContent
-              ?.trim()
-              ?.toLowerCase();
-
-            // If current input month matches next row's month, then this row is the immediate previous
-            if (nextMonth === currentMonthValue) {
-              previousRow = rows[i];
-              break;
+            for (let row of rows) {
+              const rowMonth = row.children[0]?.textContent?.trim()?.toLowerCase();
+              if (rowMonth && rowMonth !== currentMonthValue) {
+                const totalCell = row.children[4];
+                previousTotal = parseFloat(totalCell?.textContent) || 0;
+                break;
+              }
             }
           }
 
-          // Get total from that immediate previous row
-          if (previousRow) {
-            const totalCell = previousRow.children[4]; // 5th column = Total
-            const totalValue = parseFloat(totalCell.textContent) || 0;
-            previousTotal = totalValue;
-          }
-
-          total.value = (previousTotal + s + p - w).toFixed(2);
+          const calculatedTotal = previousTotal + s + p - w;
+          total.value = calculatedTotal.toFixed(2);
         });
       });
 
-      // Show Loan amount in words
       loan.addEventListener("input", () => {
         const loanValue = parseInt(loan.value) || 0;
         const inWords = numberToWords(loanValue);
@@ -377,7 +320,6 @@
           ? `${inWords}`
           : "";
       });
-
       inst.addEventListener("input", () => {
         const instValue = parseInt(inst.value) || 0;
         const inWords = numberToWords(instValue);
@@ -385,15 +327,12 @@
           ? `${inWords}`
           : "";
       });
-
       instNo.addEventListener("input", () => {
         const instNoValue = parseInt(instNo.value) || 0;
         const inWords = numberToWords(instNoValue);
-        document.getElementById("instalment_no-in-words").textContent = instNoValue
-          ? `${inWords}`
-          : "";
+        document.getElementById("instalment_no-in-words").textContent =
+          instNoValue ? `${inWords}` : "";
       });
-
       savings.addEventListener("input", () => {
         const savingsValue = parseInt(savings.value) || 0;
         const inWords = numberToWords(savingsValue);
@@ -401,7 +340,6 @@
           ? `${inWords}`
           : "";
       });
-
       profit.addEventListener("input", () => {
         const profitValue = parseInt(profit.value) || 0;
         const inWords = numberToWords(profitValue);
@@ -409,7 +347,6 @@
           ? `${inWords}`
           : "";
       });
-
       withdraw.addEventListener("input", () => {
         const withdrawValue = parseInt(withdraw.value) || 0;
         const inWords = numberToWords(withdrawValue);
@@ -417,72 +354,6 @@
           ? `${inWords}`
           : "";
       });
-
-      // Submit
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const isUpdate = formData.get("id"); // If there's an id, it's an update
-
-        formData.append("action", isUpdate ? "update" : "create");
-        //formData.append("receive_date", receiveDate.value);
-        // Ensure current instalment_due field is correctly set in formData
-        //formData.set("instalment_due", instDue.value);
-        //formData.set("instalment_due", (parseFloat(instDue.value) || 0).toFixed(2));
-
-        // Recalculate instalment_due manually before setting it in formData
-        const i = parseFloat(inst.value) || 0;
-        const n = parseInt(instNo.value) || 0;
-        let lastInstDue = 0;
-
-        // Find previous instalment_due from table OR hidden field
-        const rows = Array.from(table.querySelectorAll("tr"));
-        const currentMonthValue = month.value.trim().toLowerCase();
-
-        let previousRow = null;
-        for (let i = 0; i < rows.length - 1; i++) {
-          const nextMonth = rows[i + 1].children[0]?.textContent
-            ?.trim()
-            ?.toLowerCase();
-          if (nextMonth === currentMonthValue) {
-            previousRow = rows[i];
-            break;
-          }
-        }
-
-        if (previousRow) {
-          const prevInstDueCell = previousRow.children[8]; // 9th column
-          lastInstDue = parseFloat(prevInstDueCell.textContent) || 0;
-        } else {
-          lastInstDue =
-            parseFloat(document.getElementById("lastInstDueDisplay").value) ||
-            0;
-        }
-
-        let computedInstDue = 0;
-        if (i === 0 && n === 0) {
-          computedInstDue = 0;
-        } else {
-          computedInstDue = lastInstDue - i * n;
-          if (computedInstDue < 0) computedInstDue = 0;
-        }
-
-        formData.set("instalment_due", computedInstDue.toFixed(2));
-
-        formData.set("receive_date", receiveDate.value);
-
-        fetch(scriptURL, {
-          method: "POST",
-          body: formData,
-        }).then(() => {
-          form.reset();
-          //instDue.value = document.getElementById("lastInstDueDisplay").value;
-          document.getElementById("rowId").value = ""; // clear the hidden id field
-          loadData();
-        });
-      });
-
-      // Convert number to words (Indian Numbering System)
       function numberToWords(num) {
         const a = [
           "",
@@ -518,10 +389,8 @@
           "Eighty",
           "Ninety",
         ];
-
         if (num === 0) return "Zero";
         if (num > 99999999) return "Too large";
-
         function convert(n) {
           if (n < 20) return a[n];
           if (n < 100)
@@ -550,11 +419,8 @@
             (n % 10000000 ? " " + convert(n % 10000000) : "")
           );
         }
-
         return convert(num);
       }
-
-      // Formats an ISO date (e.g. Google Sheets value) to "June 2025"
       function formatMonth(dateString) {
         const date = new Date(dateString);
         if (isNaN(date)) return dateString; // fallback if it's already text
@@ -565,18 +431,12 @@
         };
         return date.toLocaleDateString("en-US", options);
       }
-
-      // Load Data function
       async function loadData() {
         const res = await fetch(`${scriptURL}?action=read`);
         let data = await res.json();
-
-        // 1️⃣ Sort all entries chronologically (by date)
         data.sort(
           (a, b) => new Date(a.receive_date) - new Date(b.receive_date)
         );
-
-        // 2️⃣ Dedupe: keep only the latest entry per unique month
         const unique = [];
         const seen = new Set();
         for (const row of data.reverse()) {
@@ -587,87 +447,93 @@
           }
         }
         unique.reverse(); // back to ascending
-
-        // Show all unique entries (or limit to last 12 if needed)
         const toShow = unique; // or unique.slice(-12) if you want only 12 months
 
-        // Render table rows
-        table.innerHTML = toShow
-          .map(
-            (row) => `
-      <tr class="border-t">
-        <td>${formatMonth(row.month)}</td>
-        <td>${parseFloat(row.savings || 0).toFixed(2)}</td>
-        <td>${parseFloat(row.profit || 0).toFixed(2)}</td>
-        <td>${parseFloat(row.withdraw || 0).toFixed(2)}</td>
-        <td>${parseFloat(row.total || 0).toFixed(2)}</td>
-        <td>${parseFloat(row.loan || 0)}</td>
-        <td>${parseFloat(row.instalment || 0).toFixed(2)}</td>
-        <td>${parseFloat(row.instalment_no || 0)}</td>
-        <td>${parseFloat(row.instalment_due || 0).toFixed(2)}</td>
-        <td>${row.receive_date}</td>
-        <td>${row.receiver}</td>
-        <td>${row.message}</td>
-        <td>
-          <button class="text-blue-600 mr-2" onclick='editRow(${JSON.stringify(
-            row
-          )})'>Edit</button>
-          <button class="text-red-600" onclick="deleteRow('${
-            row.id
-          }')">Delete</button>
-        </td>
-      </tr>
-    `
-          )
-          .join("");
+          table.innerHTML = ""; // Clear old rows
 
-        // 4️⃣ Update summary fields based on the most recent entry
+          toShow.forEach((row) => {
+            const tr = document.createElement("tr");
+            tr.className = "border-t";
+
+            const cells = [
+              formatMonth(row.month),
+              parseFloat(row.savings || 0).toFixed(2),
+              parseFloat(row.profit || 0).toFixed(2),
+              parseFloat(row.withdraw || 0).toFixed(2),
+              parseFloat(row.total || 0).toFixed(2),
+              parseFloat(row.loan || 0),
+              parseFloat(row.instalment || 0).toFixed(2),
+              parseFloat(row.instalment_no || 0),
+              parseFloat(row.instalment_due || 0).toFixed(2),
+              row.receive_date,
+              row.receiver,
+              row.message
+            ];
+
+            cells.forEach((text) => {
+              const td = document.createElement("td");
+              td.textContent = text;
+              tr.appendChild(td);
+            });
+
+            const actionTd = document.createElement("td");
+
+            const editBtn = document.createElement("button");
+            editBtn.className = "text-blue-600 mr-2";
+            editBtn.textContent = "Edit";
+            editBtn.onclick = () => editRow(row);
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "text-red-600";
+            deleteBtn.textContent = "Delete";
+            deleteBtn.onclick = () => deleteRow(row.id);
+
+            actionTd.appendChild(editBtn);
+            actionTd.appendChild(deleteBtn);
+            tr.appendChild(actionTd);
+
+            //table.appendChild(tr);
+            table.prepend(tr);
+
+          });
+
         const last = toShow[toShow.length - 1];
         window.lastTotal = parseFloat(last.total) || 0;
         document.getElementById("lastTotalDisplay").value =
           window.lastTotal.toFixed(2);
-
-        // Determine last loan and relevant instalment data
         const lastLoanRow = [...toShow]
           .reverse()
           .find((r) => parseFloat(r.loan) > 0);
+          window.lastLoan = parseFloat(lastLoanRow?.loan || 0);
         window.lastLoan = lastLoanRow ? parseFloat(lastLoanRow.loan) : 0;
         document.getElementById("lastLoanDisplay").value =
           window.lastLoan.toFixed(2);
-
-        // Find last row with both instalment and instalment_no present
         const lastInstRow = [...toShow].reverse().find((r) => {
           const i = parseFloat(r.instalment);
           const n = parseInt(r.instalment_no);
           return i > 0 && n > 0;
         });
-
         let lastInstDue = 0;
         if (lastLoanRow && lastInstRow) {
           const lastInst = parseFloat(lastInstRow.instalment) || 0;
           const lastInstNo = parseInt(lastInstRow.instalment_no) || 0;
           lastInstDue = window.lastLoan - lastInst * lastInstNo;
         }
-
-        // ✅ Only update display field
         document.getElementById("lastInstDueDisplay").value =
           lastInstDue.toFixed(2);
-
-        // ❌ Do NOT set instDue.value here
       }
-
-      // Edit
       function editRow(row) {
+        isEditing = true;
         document.getElementById("rowId").value = row.id;
-        // month.value = row.month;
+        total.removeAttribute("readonly");
         const date = new Date(row.month);
         const formattedMonth =
           monthsText[date.getMonth()] + " " + date.getFullYear();
         month.value = formattedMonth;
-
         savings.value = row.savings;
         profit.value = row.profit;
         withdraw.value = row.withdraw;
+        total.value = row.total;
         loan.value = row.loan;
         inst.value = row.instalment;
         instNo.value = row.instalment_no;
@@ -675,24 +541,41 @@
         receiveDate.value = formatDate(row.receive_date);
         document.getElementById("receiver").value = row.receiver;
         document.getElementById("message").value = row.message;
-
-        // Trigger input to recalculate totals
+        document.getElementById('method').value = 'update';
+        document.getElementById("lastTotalDisplay").value = row.total;
         savings.dispatchEvent(new Event("input"));
+        //document.getElementById("lastTotalDisplay").value = getPreviousTotalFromTable(row);
       }
-      // Date format
+
+      function getPreviousTotalFromTable(currentRow) {
+        const rows = Array.from(table.querySelectorAll("tr")).reverse();
+        let foundCurrent = false;
+
+        for (let r of rows) {
+          const rowMonth = r.children[0]?.textContent?.trim()?.toLowerCase();
+          const currentMonth = formatMonth(currentRow.month).toLowerCase();
+          if (rowMonth === currentMonth) {
+            foundCurrent = true;
+            continue;
+          }
+
+          if (foundCurrent) {
+            return parseFloat(r.children[4]?.textContent) || 0;
+          }
+        }
+
+        return 0;
+      }
+
       function formatDate(dateStr) {
         const d = new Date(dateStr);
         if (isNaN(d)) return ""; // fallback for invalid dates
         const offset = d.getTime() + 6 * 60 * 60 * 1000; // Add GMT+6
         return new Date(offset).toISOString().split("T")[0];
       }
-
-      // Delete
       function deleteRow(id) {
         fetch(`${scriptURL}?action=delete&id=${id}`).then(loadData);
       }
-
-      // Search
       search.addEventListener("input", () => {
         const val = search.value.toLowerCase();
         document.querySelectorAll("#data-table tr").forEach((row) => {
@@ -702,13 +585,35 @@
         });
         clearSearch.classList.toggle("hidden", !val);
       });
-
       clearSearch.addEventListener("click", () => {
         search.value = "";
         search.dispatchEvent(new Event("input"));
       });
 
-      loadData();
+        form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const method = document.getElementById('method').value;
+        formData.set('action', method);
+
+        const res = await fetch(scriptURL, { method: 'POST', body: formData });
+        const result = await res.json();
+
+        if (!result.success) {
+          alert(`Error: ${result.message}`);
+          return;
+        }
+        alert('Success!');
+        form.reset();
+        document.getElementById('method').value = 'create';
+        await loadData();
+        isEditing = false;
+      });
+        // Init
+        (async function initializeApp() {
+        await loadData();          // Load the table data from Google Sheets
+        updateInstAndNo();         // Update instalment fields based on fresh data
+      })();
     </script>
   </body>
 </html>
