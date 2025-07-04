@@ -99,6 +99,7 @@
           class="text-xs text-blue-600 italic mt-1"
         ></p>
       </div>
+      <div class="flex flex-col col-span-1">
       <input
         type="number"
         id="instalment_due"
@@ -107,6 +108,8 @@
         class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-600 cursor-not-allowed"
         readonly
       />
+        <p id="instalment_due-in-words" class="text-xs text-blue-600 italic mt-1"></p>
+      </div>
       <input
         type="date"
         id="receive_date"
@@ -332,6 +335,11 @@
         const inWords = numberToWords(instNoValue);
         document.getElementById("instalment_no-in-words").textContent =
           instNoValue ? `${inWords}` : "";
+      });
+      instDue.addEventListener("input", () => {
+        const dueValue = parseInt(instDue.value) || 0;
+        const inWords = numberToWords(dueValue);
+        document.getElementById("instalment_due-in-words").textContent = dueValue ? `${inWords}` : "";
       });
       savings.addEventListener("input", () => {
         const savingsValue = parseInt(savings.value) || 0;
