@@ -431,6 +431,16 @@
         };
         return date.toLocaleDateString("en-US", options);
       }
+      // function formatDateDDMMYYYY
+      function formatDateDDMMYYYY(dateStr) {
+        const cleanDateStr = dateStr.split("T")[0]; // removes anything after 'T'
+        const date = new Date(cleanDateStr);
+        if (isNaN(date)) return dateStr; // fallback
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+      }
       async function loadData() {
         const res = await fetch(`${scriptURL}?action=read`);
         let data = await res.json();
@@ -465,7 +475,7 @@
               parseFloat(row.instalment || 0).toFixed(2),
               parseFloat(row.instalment_no || 0),
               parseFloat(row.instalment_due || 0).toFixed(2),
-              row.receive_date,
+              formatDateDDMMYYYY(row.receive_date),
               row.receiver,
               row.message
             ];
