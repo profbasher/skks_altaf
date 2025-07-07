@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Savings Manager(altaf)</title>
+    <title>Savings Manager(Altaf)</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-white text-black p-6">
@@ -99,7 +99,6 @@
           class="text-xs text-blue-600 italic mt-1"
         ></p>
       </div>
-      <div class="flex flex-col col-span-1">
       <input
         type="number"
         id="instalment_due"
@@ -108,13 +107,10 @@
         class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-600 cursor-not-allowed"
         readonly
       />
-        <p id="instalment_due-in-words" class="text-xs text-blue-600 italic mt-1"></p>
-      </div>
       <input
         type="date"
         id="receive_date"
         name="receive_date"
-        placeholder="Date (e.g., mm/dd/yyyy)"
         class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <input
@@ -173,7 +169,7 @@
     </div>
     <script>
       const scriptURL =
-        "https://script.google.com/macros/s/AKfycbwxCKf9tyAoh848pATUwtBQYnYHvAlKhSY9aE7wGTwhbFrQ2Px0hGxM5j5pa14Q1rkI/exec";
+        "https://script.google.com/macros/s/AKfycbxw8SyE2J3FZ3SivAX1eGRy2EyV7vrwfOzK3XtvzzVG4D3AOIA9TnEDTH4n5pyNLmYh/exec";
         
       const form = document.getElementById("savings-form");
       const table = document.getElementById("data-table");
@@ -435,16 +431,6 @@
         };
         return date.toLocaleDateString("en-US", options);
       }
-      // function formatDateDDMMYYYY
-      function formatDateDDMMYYYY(dateStr) {
-        const cleanDateStr = dateStr.split("T")[0]; // removes anything after 'T'
-        const date = new Date(cleanDateStr);
-        if (isNaN(date)) return dateStr; // fallback
-        const day = String(date.getDate()).padStart(2, "0");
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-      }
       async function loadData() {
         const res = await fetch(`${scriptURL}?action=read`);
         let data = await res.json();
@@ -479,7 +465,7 @@
               parseFloat(row.instalment || 0).toFixed(2),
               parseFloat(row.instalment_no || 0),
               parseFloat(row.instalment_due || 0).toFixed(2),
-              formatDateDDMMYYYY(row.receive_date),
+              row.receive_date,
               row.receiver,
               row.message
             ];
